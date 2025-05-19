@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
@@ -18,9 +19,47 @@ public class DayNightCycle : MonoBehaviour
 
     [Header("Moon")]
     public Light moon;
-    public AN
+    public Gradient moonColor;
+    public AnimationCurve moonIntenstiy;
 
     [Header("Other Lighting")]
-    public AnimationCurve lighting
+    public AnimationCurve lightingIntensityMulitplier;
+    public AnimationCurve reflectionIntensityMultitplier;
 
+    private void Start()
+    {
+        timeRate = 1.0f / fullDayLength;
+        time = startTime;
+    }
+
+    private void Update()
+    {
+        time = (time + timeRate * Time.deltaTime) % 1.0f;
+
+        UpdateLighting(sun, sunColor, sunIntenstiy);
+        UpdateLighting(moon, moonColor, moonIntenstiy);
+
+        RenderSettings.ambientIntensity = lightingIntensityMulitplier.Evaluate(time);
+        RenderSettings.reflectionIntensity = reflectionIntensityMultitplier.Evaluate(time);
+    }
+
+    void UpdateLighting(Light lightSource, Gradient gradient, AnimationCurve intenstiryCurve)
+    {
+        float intensity = intenstiryCurve.Evaluate(time);
+
+        // 정오시간 계산
+        lightSource.transform.eulerAngles = (time - (lightSource == sun ? 0.5f : 0.75f)) * noon;
+        lightSource.color = gradient.Evaluate(time);
+        lightSource.intensity = intensity;
+
+        GameObject go = lightSource.gameObject;
+        if(lightSource.intensity == 0 && go.activeInHierarchy)
+        {
+            go.SetActive(false);
+        }
+        else if(lightSource.intensity > 0 && !go.activeInHierarchy)
+        {
+            go.SetActive(true);
+        }
+    }
 }
