@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro.EditorUtilities;
@@ -24,6 +25,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _jumpPower = 5f;
     private Rigidbody _rb;
 
+    public bool canLook = true;
+    public event Action OnInventory;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -41,7 +45,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        CameraLook();
+        if (canLook)
+        {
+            CameraLook();
+        }
     }
 
     private void Move()
@@ -105,5 +112,21 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void onInventory(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            OnInventory?.Invoke();
+            ToggleCursor();
+        }
+    }
+
+    void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }

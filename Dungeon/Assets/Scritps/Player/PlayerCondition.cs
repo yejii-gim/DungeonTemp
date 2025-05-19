@@ -42,4 +42,14 @@ public class PlayerCondition : MonoBehaviour,IDamagable
         health.Substact(damage);
         onTakeDamage?.Invoke();
     }
+
+    public void Heal(float count)
+    {
+        health.Add(count);
+    }
+
+    public void Eat(float count)
+    {
+        hunger.Add(count);
+    }
 }
