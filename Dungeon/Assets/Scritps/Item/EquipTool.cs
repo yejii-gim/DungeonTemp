@@ -7,6 +7,7 @@ public class EquipTool : Equip
     public float attackRate;
     private bool attacking;
     public float attackDistance;
+    public float useStamina;
 
     [Header("Resource Gathering")]
     public bool doesGatherResource;
@@ -28,9 +29,12 @@ public class EquipTool : Equip
     {
         if(!attacking)
         {
-            attacking = true;
-            animator.SetTrigger("Attack");
-            Invoke("OnCanAttack", attackRate);
+            if (CharcterManager.Instance.player.condition.UseStamina(useStamina))
+            {
+                attacking = true;
+                animator.SetTrigger("Attack");
+                Invoke("OnCanAttack", attackRate);
+            }
         }
     }
 
@@ -45,9 +49,15 @@ public class EquipTool : Equip
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit,attackDistance))
         {
-            if(doesGatherResource && hit.collider.TryGetComponent(out Resource resource))
+            Debug.Log("Ray Hit: " + hit.collider.name);
+            if (doesGatherResource && hit.collider.TryGetComponent(out Resource resource))
             {
                 resource.Gather(hit.point, hit.normal);
+            }
+            if (doesDealDamage && hit.collider.TryGetComponent(out NPC npc))
+            {
+                Debug.Log(npc.health);
+                npc.TakePhysicalDamage(damage);
             }
         }
     }

@@ -52,4 +52,14 @@ public class PlayerCondition : MonoBehaviour,IDamagable
     {
         hunger.Add(count);
     }
+
+    public bool UseStamina(float amount)
+    {
+        if(stamina.curValue - amount < 0f)
+        {
+            return false;
+        }
+        stamina.Substact(amount);
+        return true;
+    }
 }
