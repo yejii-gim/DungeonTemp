@@ -16,9 +16,11 @@ public class EquipTool : Equip
     public int damage;
 
     private Animator animator;
+    private Camera camera;
     void Start()
     {
         animator = GetComponent<Animator>();
+        camera = Camera.main;
     }
 
     
@@ -35,5 +37,18 @@ public class EquipTool : Equip
     void OnCanAttack()
     {
         attacking = false;
+    }
+
+    public void OnHit()
+    {
+        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width/2,Screen.height/2,0));
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit,attackDistance))
+        {
+            if(doesGatherResource && hit.collider.TryGetComponent(out Resource resource))
+            {
+                resource.Gather(hit.point, hit.normal);
+            }
+        }
     }
 }

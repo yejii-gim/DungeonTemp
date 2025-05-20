@@ -365,6 +365,7 @@
 "Assets/Scritps/Item/Equip.cs"
 "Assets/Scritps/Item/EquipTool.cs"
 "Assets/Scritps/Item/ItemObject.cs"
+"Assets/Scritps/Item/Resource.cs"
 "Assets/Scritps/Player/CharcterManager.cs"
 "Assets/Scritps/Player/Equipment.cs"
 "Assets/Scritps/Player/Interaction.cs"
