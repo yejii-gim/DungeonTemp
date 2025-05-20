@@ -370,6 +370,7 @@
 "Assets/Scritps/Item/EquipTool.cs"
 "Assets/Scritps/Item/ItemObject.cs"
 "Assets/Scritps/Item/Resource.cs"
+"Assets/Scritps/JumpPad.cs"
 "Assets/Scritps/MusicZone.cs"
 "Assets/Scritps/NPC/NPC.cs"
 "Assets/Scritps/Player/CharcterManager.cs"
