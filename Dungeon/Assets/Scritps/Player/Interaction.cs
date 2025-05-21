@@ -10,27 +10,36 @@ public class Interaction : MonoBehaviour
     private float lastCheckTime;
     public float maxCheckDistance;
     public LayerMask layerMask;
-
     public GameObject curInteractGameObject;
     private IInteractable curInteractable;
-
+    [SerializeField] private Transform _thirdPersonTransform; // 3인치 전용 Ray 시작 위치
+    [SerializeField] TMP_Text _rayText;
     public TextMeshProUGUI promptText;
     private Camera camera;
 
-    private void Start()
-    {
-        camera = Camera.main;
-    }
 
     private void Update()
     {
         if(Time.time - lastCheckTime > checkRate)
         {
             lastCheckTime = Time.time;
-
-            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+            Ray ray;
+            if (CharcterManager.Instance.player.controller.isFirstPerson)
+            {
+                camera = CharcterManager.Instance.player.controller.firstPerson;
+                ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+                _rayText.text = "1인칭 시점";
+            }
+            else
+            {
+                // 캐릭터의 앞을 기준으로 Ray 생성
+                camera = CharcterManager.Instance.player.controller.thirdPerson;
+                ray = new Ray(_thirdPersonTransform.position, camera.transform.forward);
+                _rayText.text = "3인칭 시점";
+            }
+           
             RaycastHit hit;
-
+            Debug.DrawRay(ray.origin, ray.direction * maxCheckDistance, Color.red);
             if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
             {
                 if (hit.collider.gameObject != curInteractGameObject)

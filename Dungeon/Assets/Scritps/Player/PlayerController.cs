@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float lookSensitivity;
     private Vector2 mouseDelta;
 
+    public Camera firstPerson;   // 1인칭 시 카메라 위치 
+    public Camera thirdPerson;   // 3인칭 시 카메라 위치
+
+    public bool isFirstPerson = true;
+
     [Header("Jump")]
     [SerializeField] float _jumpPower = 5f;
     private Rigidbody _rb;
@@ -29,13 +34,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _dashPower = 50f;
     private int jumpCount = 0;
     private int maxJumpCount = 2;
+
     public bool canLook = true;
     public event Action OnInventory;
     public event Action OnInformation;
     private PlayerCondition condition;
     private bool isDash;
     private bool isDoubleJump;
-    
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -56,8 +62,12 @@ public class PlayerController : MonoBehaviour
     {
         if (canLook)
         {
-            CameraLook();
+            if (isFirstPerson)
+                FirstPersonCameraLook();
+            else
+                ThirdPersonCameraLook();
         }
+
     }
 
     private void Move()
@@ -69,8 +79,10 @@ public class PlayerController : MonoBehaviour
         _rb.velocity = dir;
     }
 
-    void CameraLook()
+    // 1인칭 카메라용
+    void FirstPersonCameraLook()
     {
+        isFirstPerson = true;
         camCurXRot += mouseDelta.y * lookSensitivity;
         camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
         CameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
@@ -78,6 +90,35 @@ public class PlayerController : MonoBehaviour
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
     }
 
+    // 3인칭 카메라용
+    void ThirdPersonCameraLook()
+    {
+        isFirstPerson = false;
+        camCurXRot += mouseDelta.y * lookSensitivity;
+        camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
+        CameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
+        transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
+    }
+
+    public void onSwitchCamera(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+
+            isFirstPerson = !isFirstPerson;
+
+            if (isFirstPerson)
+            {
+                firstPerson.gameObject.SetActive(true);
+                thirdPerson.gameObject.SetActive(false);
+            }
+            else
+            {
+                thirdPerson.gameObject.SetActive(true);
+                firstPerson.gameObject.SetActive(false);
+            }
+        }
+    }
     public void OnMove(InputAction.CallbackContext context)
     {
         //Debug.Log(context.phase);
