@@ -64,4 +64,29 @@ public class SkillManager : Singleton<SkillManager>
             }
         }
     }
+
+    public bool CheckUnLockSkill(SkillType type)
+    {
+        foreach (var slot in slots)
+        {
+            if (slot.skill != null && slot.skill.type == type)
+            {
+                if (slot.isOpen) return true;
+            }
+        }
+        return false;
+    }
+
+    public float GetCoolTime(SkillType type)
+    {
+        foreach (var slot in slots)
+        {
+            if (slot.skill != null && slot.skill.type == type)
+            {
+                if (slot.isOpen) return slot.skill.coolTime;
+            }
+        }
+        return 0;
+    }
+
 }

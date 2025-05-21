@@ -25,9 +25,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _jumpPower = 5f;
     private Rigidbody _rb;
 
+    [Header("Dash & DoubleJump")]
+    [SerializeField] float _dashPower = 50f;
+    private int jumpCount = 0;
+    private int maxJumpCount = 2;
     public bool canLook = true;
     public event Action OnInventory;
     public event Action OnInformation;
+    private PlayerCondition condition;
+    private bool isDash;
+    private bool isDoubleJump;
+    
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -36,6 +44,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        condition = CharcterManager.Instance.GetComponent<PlayerCondition>() ?? CharcterManager.Instance.player.GetComponent<PlayerCondition>();
     }
 
     private void Update()
@@ -142,11 +151,59 @@ public class PlayerController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
-
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (SkillManager.Instance.CheckUnLockSkill(SkillType.Dash) && !isDash)
+            {
+                SkillManager.Instance.TriggerCooldown(SkillType.Dash);
+                condition.Dash(20f);
+                StartCoroutine(Dash(_dashPower));
+            }
+        }
     }
 
     public void OnDoubleJump(InputAction.CallbackContext context)
     {
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (IsGrounded() && !isDoubleJump)
+            {
+                jumpCount = 0;
+                isDoubleJump = true;
+                SkillManager.Instance.TriggerCooldown(SkillType.DoubleJump);
+                condition.DoubleJump(10f);
+            }
+            if (SkillManager.Instance.CheckUnLockSkill(SkillType.DoubleJump) && jumpCount < maxJumpCount && isDoubleJump)
+            {
+                jumpCount++;
+                _rb.velocity = new Vector2(_rb.velocity.x, 0f); 
+                _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
+                if(jumpCount == maxJumpCount) isDoubleJump = false;
+            }
+        }
+    }
 
+    public void OnInvincible(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (SkillManager.Instance.CheckUnLockSkill(SkillType.Invincible))
+            {
+                SkillManager.Instance.TriggerCooldown(SkillType.Invincible);
+                condition.Invincibility(40f, SkillManager.Instance.GetCoolTime(SkillType.Invincible));
+            }
+        }    
+    }
+
+    private IEnumerator Dash(float dashPower)
+    {
+        isDash = true;
+
+        Vector2 dir = new Vector2(transform.localScale.x, 0f); // 현재 플레이어가 바라보는 방향
+        _rb.AddForce(dir * dashPower, ForceMode.Impulse);
+
+        yield return new WaitForSeconds(SkillManager.Instance.GetCoolTime(SkillType.Dash));
+
+        isDash = false;
     }
 }

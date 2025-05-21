@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: "\uBB34\uC801"
   icon: {fileID: 21300000, guid: c455912b69c65cd429a66a3c3e08cdf3, type: 3}
-  coolTime: 5
+  coolTime: 10
+  durationTime: 5
+  type: 0

@@ -67,7 +67,6 @@ public class SkillSlot : MonoBehaviour
 
     public void UnLock()
     {
-        Debug.Log("¿­·È´Ù");
         isOpen = true;
         LockImage.SetActive(false);
         cooldownImage.fillAmount = 0f;
