@@ -71,7 +71,7 @@ public class InventorySelected : MonoBehaviour
 
     public void OnUseButton()
     {
-        if (selectedItem.type != ItemType.Consumable) return;
+        if (selectedItem.type != ItemType.Consumable || selectedItem.type != ItemType.Box) return;
 
         foreach (var effect in selectedItem.consumables)
         {
@@ -90,7 +90,6 @@ public class InventorySelected : MonoBehaviour
                     break;
             }
         }
-
         RemoveSelectedItem();
     }
 
