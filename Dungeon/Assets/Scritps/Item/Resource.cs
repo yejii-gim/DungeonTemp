@@ -8,6 +8,7 @@ public class Resource : MonoBehaviour
     public int quantityPerHit = 1;
     public int capacy;
 
+    // 채집시 호출되는 메서드
     public void Gather(Vector3 hitPoint, Vector3 hitNormal)
     {
         for(int i = 0; i<quantityPerHit; i++)

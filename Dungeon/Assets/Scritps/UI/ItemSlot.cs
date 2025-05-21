@@ -13,7 +13,7 @@ public class ItemSlot : MonoBehaviour
     public TextMeshProUGUI quantityText;
     private Outline outline;
 
-    public UIInventory inventory;
+    public InventorySelected inventorySelected;
 
     public int index;
     public bool equipped;
@@ -26,6 +26,7 @@ public class ItemSlot : MonoBehaviour
 
     private void OnEnable()
     {
+        // euipped인 경우 활성화될때 outline 표시
         outline.enabled = equipped;
     }
 
@@ -50,6 +51,6 @@ public class ItemSlot : MonoBehaviour
 
     public void OnClickButton()
     {
-        inventory.SelectItem(index);
+        inventorySelected.SelectItem(index);
     }
 }

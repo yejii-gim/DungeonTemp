@@ -1064,6 +1064,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (1)
@@ -1256,6 +1260,7 @@ RectTransform:
   - {fileID: 1266910438}
   - {fileID: 1829099200}
   - {fileID: 1296062866}
+  - {fileID: 1533813038}
   m_Father: {fileID: 770837544}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1304,6 +1309,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (10)
@@ -1401,6 +1410,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (6)
@@ -1943,6 +1956,7 @@ GameObject:
   - component: {fileID: 587420291}
   - component: {fileID: 587420290}
   - component: {fileID: 587420293}
+  - component: {fileID: 587420294}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -2047,10 +2061,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13770e0823e87dd41b49afc80f1378a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots: []
   inventoryWindow: {fileID: 587420288}
   slotPanel: {fileID: 2112494435}
-  dropPosition: {fileID: 1290487429}
+--- !u!114 &587420294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587420288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e1fdf98588c714a877b9939619b03f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   selectedItemName: {fileID: 1908425374}
   selectedItemDescription: {fileID: 1557951344}
   selectedStatName: {fileID: 1215164046}
@@ -2059,6 +2083,7 @@ MonoBehaviour:
   equipButton: {fileID: 1436156505}
   unequipButton: {fileID: 798711907}
   dropButton: {fileID: 1744514016}
+  slots: []
 --- !u!224 &621102892 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7088409196563790940, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
@@ -2300,6 +2325,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (3)
@@ -2510,10 +2539,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 587420293}
-        m_TargetAssemblyTypeName: UIInventory, Assembly-CSharp
+      - m_Target: {fileID: 587420294}
+        m_TargetAssemblyTypeName: InventorySelected, Assembly-CSharp
         m_MethodName: OnUnEquipButton
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2568,6 +2597,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (9)
@@ -3367,6 +3400,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (4)
@@ -3824,8 +3861,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 587420293}
-        m_TargetAssemblyTypeName: UIInventory, Assembly-CSharp
+      - m_Target: {fileID: 587420294}
+        m_TargetAssemblyTypeName: InventorySelected, Assembly-CSharp
         m_MethodName: OnUseButton
         m_Mode: 1
         m_Arguments:
@@ -4067,6 +4104,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (12)
@@ -4618,6 +4659,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (13)
@@ -4859,6 +4904,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (2)
@@ -4956,6 +5005,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (8)
@@ -5196,8 +5249,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 587420293}
-        m_TargetAssemblyTypeName: UIInventory, Assembly-CSharp
+      - m_Target: {fileID: 587420294}
+        m_TargetAssemblyTypeName: InventorySelected, Assembly-CSharp
         m_MethodName: OnEquipButton
         m_Mode: 1
         m_Arguments:
@@ -5502,6 +5555,81 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7088409196563790940, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
   m_PrefabInstance: {fileID: 1379887660}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1533813037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1533813038}
+  - component: {fileID: 1533813040}
+  - component: {fileID: 1533813039}
+  m_Layer: 5
+  m_Name: Information
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1533813038
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533813037}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 437023724}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -5, y: -5}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 1, y: 1}
+--- !u!114 &1533813039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533813037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b0945983ec23ab042a46ca54598643d6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1533813040
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533813037}
+  m_CullTransparentMesh: 1
 --- !u!1 &1557951342
 GameObject:
   m_ObjectHideFlags: 0
@@ -5644,6 +5772,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (5)
@@ -5816,9 +5948,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 587420293}
-        m_TargetAssemblyTypeName: UIInventory, Assembly-CSharp
-        m_MethodName: OndDropButton
+      - m_Target: {fileID: 587420294}
+        m_TargetAssemblyTypeName: InventorySelected, Assembly-CSharp
+        m_MethodName: OnDropButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5874,6 +6006,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (11)
@@ -6184,7 +6320,7 @@ GameObject:
   - component: {fileID: 1829099202}
   - component: {fileID: 1829099201}
   m_Layer: 5
-  m_Name: Image
+  m_Name: aim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6247,6 +6383,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829099199}
   m_CullTransparentMesh: 1
+--- !u!1 &1883404624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1883404626}
+  - component: {fileID: 1883404625}
+  - component: {fileID: 1883404627}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1883404625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883404624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b7fc83d6f5c2bf40a291103bbf06f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots:
+  - {fileID: 0}
+  dropPosition: {fileID: 1290487429}
+--- !u!4 &1883404626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883404624}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1883404627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883404624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd06e87abb9c1ef468fbef7bd3ab6bcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1908425372
 GameObject:
   m_ObjectHideFlags: 0
@@ -6469,6 +6665,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot (7)
@@ -7478,6 +7678,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112494435}
     m_Modifications:
+    - target: {fileID: 2011681049714855524, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
+      propertyPath: inventorySelected
+      value: 
+      objectReference: {fileID: 587420294}
     - target: {fileID: 6050684346561634005, guid: 441936d8aea513640b37883dc6d81fc6, type: 3}
       propertyPath: m_Name
       value: ItemSlot
@@ -9366,3 +9570,4 @@ SceneRoots:
   - {fileID: 21131778}
   - {fileID: 77545661}
   - {fileID: 1281576530}
+  - {fileID: 1883404626}

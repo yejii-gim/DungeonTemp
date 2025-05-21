@@ -14,6 +14,7 @@ public class DamageIndicator : MonoBehaviour
         CharcterManager.Instance.player.condition.onTakeDamage += Flash;
     }
 
+    // 피격시 호출되어 화면에 빨간색 보이게하는 함수
     public void Flash()
     {
         if(coroutine != null)
@@ -25,6 +26,7 @@ public class DamageIndicator : MonoBehaviour
         coroutine = StartCoroutine(FadeAway());
     }
 
+    // 알파값 조절해서 이미지가 사라져보이게끔 하는 코루틴
     private IEnumerator FadeAway()
     {
         float startAlpha = 0.3f;

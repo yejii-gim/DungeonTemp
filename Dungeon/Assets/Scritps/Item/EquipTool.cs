@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EquipTool : Equip
 {
-    public float attackRate;
+    public float attackRate; // 쿨타임
     private bool attacking;
-    public float attackDistance;
+    public float attackDistance; // 공격 가능 거리
     public float useStamina;
 
     [Header("Resource Gathering")]
@@ -33,11 +33,12 @@ public class EquipTool : Equip
             {
                 attacking = true;
                 animator.SetTrigger("Attack");
-                Invoke("OnCanAttack", attackRate);
+                Invoke("OnCanAttack", attackRate); // 쿨타임 기다리도록
             }
         }
     }
 
+    // 쿨타임 해제
     void OnCanAttack()
     {
         attacking = false;
@@ -49,11 +50,12 @@ public class EquipTool : Equip
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit,attackDistance))
         {
-            Debug.Log("Ray Hit: " + hit.collider.name);
+            // 자원 채집
             if (doesGatherResource && hit.collider.TryGetComponent(out Resource resource))
             {
                 resource.Gather(hit.point, hit.normal);
             }
+            // 적 때리기
             if (doesDealDamage && hit.collider.TryGetComponent(out NPC npc))
             {
                 Debug.Log(npc.health);
