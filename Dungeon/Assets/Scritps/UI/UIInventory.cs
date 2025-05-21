@@ -14,7 +14,7 @@ public class UIInventory : MonoBehaviour
     private void Start()
     {
         itemSelector = GetComponent<InventorySelected>();
-
+        itemSelector.ClearSelectedItemWindow();
         inventoryWindow.SetActive(false);
         InventoryManager.Instance.InitializeSlots(slotPanel);
         itemSelector.slots = InventoryManager.Instance.slots;
@@ -30,7 +30,7 @@ public class UIInventory : MonoBehaviour
 
     public void Toggle()
     {
-        inventoryWindow.SetActive(!inventoryWindow.activeInHierarchy);
+        UIManager.Instance.Toggle(inventoryWindow);
     }
    
 }

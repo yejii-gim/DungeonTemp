@@ -13,7 +13,10 @@ public enum ItemType
 public enum ConsumableType
 {
     Health,
-    Hunger
+    Hunger,
+    Invincible,
+    Dash,
+    DoubleJump,
 }
 [Serializable]
 public class ItemDataConsumable

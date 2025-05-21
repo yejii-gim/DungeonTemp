@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     public bool canLook = true;
     public event Action OnInventory;
-
+    public event Action OnInformation;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour
         if(context.phase == InputActionPhase.Started && IsGrounded())
         {
             _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
+
         }
     }
 
@@ -128,5 +129,24 @@ public class PlayerController : MonoBehaviour
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+
+    public void onInformation(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            OnInformation?.Invoke();
+            ToggleCursor();
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnDoubleJump(InputAction.CallbackContext context)
+    {
+
     }
 }

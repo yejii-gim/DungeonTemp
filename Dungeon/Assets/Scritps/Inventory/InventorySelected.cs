@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 
 public class InventorySelected : MonoBehaviour
-{
+{ 
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
     public TextMeshProUGUI selectedStatName;
@@ -79,6 +79,15 @@ public class InventorySelected : MonoBehaviour
             {
                 case ConsumableType.Health: condition.Heal(effect.value); break;
                 case ConsumableType.Hunger: condition.Eat(effect.value); break;
+                case ConsumableType.Invincible:
+                    SkillManager.Instance.UnLockSkill(SkillType.Invincible);
+                    break;
+                case ConsumableType.Dash:
+                    SkillManager.Instance.UnLockSkill(SkillType.Dash);
+                    break;
+                case ConsumableType.DoubleJump:
+                    SkillManager.Instance.UnLockSkill(SkillType.DoubleJump);
+                    break;
             }
         }
 

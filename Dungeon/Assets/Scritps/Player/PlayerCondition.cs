@@ -17,6 +17,20 @@ public class PlayerCondition : MonoBehaviour,IDamagable
 
     public float noHungerHealthDecay;
     public event Action onTakeDamage;
+
+    // 公利 包访
+    private bool isInvincible = false;
+    private float invincibleTime = 0f;
+    public Color invincibleColor = new Color(1f, 1f, 1f, 0.5f); // 馆捧疙
+    private Color originColor;
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+            originColor = spriteRenderer.color;
+    }
     private void Update()
     {
         hunger.Substact(hunger.passiveValue * Time.deltaTime);
@@ -31,6 +45,22 @@ public class PlayerCondition : MonoBehaviour,IDamagable
         {
             Die();
         }
+
+        // 公利 包访
+        if (isInvincible)
+        {
+            invincibleTime -= Time.deltaTime;
+
+            if (spriteRenderer != null)
+                spriteRenderer.color = invincibleColor;
+
+            if (invincibleTime <= 0f)
+            {
+                isInvincible = false;
+                if (spriteRenderer != null)
+                    spriteRenderer.color = originColor;
+            }
+        }
     }
     public void Die()
     {
@@ -39,6 +69,11 @@ public class PlayerCondition : MonoBehaviour,IDamagable
 
     public void TakePhysicalDamage(int damage)
     {
+        // 公利 惑怕老矫 公矫
+        if (isInvincible)
+        {
+            return;
+        }
         health.Substact(damage);
         onTakeDamage?.Invoke();
     }
@@ -61,5 +96,20 @@ public class PlayerCondition : MonoBehaviour,IDamagable
         }
         stamina.Substact(amount);
         return true;
+    }
+
+    public void Invincibility(float count)
+    {
+        UseStamina(count);
+    }
+
+    public void Dash(float count)
+    {
+        UseStamina(count);
+    }
+
+    public void DoubleJump(float count)
+    {
+        UseStamina(count);
     }
 }
