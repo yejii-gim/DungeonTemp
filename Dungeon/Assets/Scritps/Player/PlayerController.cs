@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private float camCurXRot;
     [SerializeField] private float lookSensitivity;
     private Vector2 mouseDelta;
-
+    public bool canLook = true;
     public Camera firstPerson;   // 1인칭 시 카메라 위치 
     public Camera thirdPerson;   // 3인칭 시 카메라 위치
 
@@ -35,13 +32,20 @@ public class PlayerController : MonoBehaviour
     private int jumpCount = 0;
     private int maxJumpCount = 2;
 
-    public bool canLook = true;
+    [Header("Climb")]
+    private bool _wallCheck;
+    [SerializeField] float _climbSpeed = 3f;
+    [SerializeField] float _climbCheckDistance = 0.6f;
+    [SerializeField] LayerMask wallLayer;
+
+    
     public event Action OnInventory;
     public event Action OnInformation;
     private PlayerCondition condition;
     private bool isDash;
     private bool isDoubleJump;
-
+    private bool isSliding;
+    private bool isJumping;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -139,10 +143,15 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && IsGrounded())
-        {
-            _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
+        if (context.phase != InputActionPhase.Started) return;
 
+        if(IsGrounded()) // 점프
+        {
+             _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
+        }
+        else if(CheckWall() && !IsGrounded()) // 벽타기
+        {
+            _rb.AddForce(Vector3.up * _jumpPower * 5f, ForceMode.Impulse);
         }
     }
 
@@ -248,5 +257,13 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(SkillManager.Instance.GetCoolTime(SkillType.Dash));
 
         isDash = false;
+    }
+
+    private bool CheckWall()
+    {
+        Ray ray = new Ray(transform.position, transform.forward);
+        _wallCheck = Physics.Raycast(ray, _climbCheckDistance, wallLayer);
+        if (_wallCheck) return true;
+        return false;
     }
 }
