@@ -148,16 +148,18 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded()
     {
-        Ray[] rays = new Ray[4]
+        Vector3 origin = transform.position + Vector3.down * 0.4f; // ray 기준점
+        Ray[] rays = new Ray[5]
         {
-           new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (-transform.right * 0.2f) +(transform.up * 0.01f), Vector3.down)
+            new Ray(origin, Vector3.down), // 중심에서 아래
+            new Ray(origin + transform.forward * 0.3f, Vector3.down), // 앞쪽에서 아래
+            new Ray(origin - transform.forward * 0.3f, Vector3.down), // 뒤쪽에서 아래
+            new Ray(origin + transform.right * 0.3f, Vector3.down), // 오른쪽에서 아래
+            new Ray(origin - transform.right * 0.3f, Vector3.down) // 왼쪽에서 아래
         };
         for(int i = 0; i< rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i],0.1f,groundLayerMask))
+            if (Physics.Raycast(rays[i], 0.5f, groundLayerMask))
             {
                 return true;
             }
