@@ -31,5 +31,7 @@ public class Shooter : MonoBehaviour, IInteractable
         Vector3 dir =  shootDirection.position - shootPosition.position;
         _rb.AddForce(dir * _shootPower, ForceMode.Impulse);
         CharcterManager.Instance.player.transform.rotation = _orgRotation;
+        CharcterManager.Instance.player.controller.canMove = false;
+        Invoke(nameof(CharcterManager.Instance.player.controller.EnableMove), 0.5f);
     }
 }

@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private bool isDoubleJump;
     private bool isSliding;
     private bool isJumping;
+    public bool canMove = true;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -61,7 +62,10 @@ public class PlayerController : MonoBehaviour
     {
         Move();
     }
-
+    public void EnableMove()
+    {
+        canMove = true;
+    }
     private void LateUpdate()
     {
         if (canLook)
@@ -76,6 +80,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        if (!canMove) return;
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
         dir.y = _rb.velocity.y;
