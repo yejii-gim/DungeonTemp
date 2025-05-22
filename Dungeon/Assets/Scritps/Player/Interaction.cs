@@ -16,7 +16,6 @@ public class Interaction : MonoBehaviour
     [SerializeField] private Transform _thirdPersonTransform; // 3인치 전용 Ray 시작 위치
     [SerializeField] TMP_Text _rayText;
     [SerializeField] ItemData[] items;
-    public TextMeshProUGUI promptText;
     private Camera camera;
 
 
@@ -51,22 +50,20 @@ public class Interaction : MonoBehaviour
                     curItemObject = hit.collider.GetComponent<ItemObject>().ItemData;
                     // 프롬포트에 출력
                     SetPromptText();
-                    Debug.Log(curItemObject.type);
                 }
             }
             else
             {
                 curInteractGameObject = null;
                 curInteractable = null;
-                promptText.gameObject.SetActive(false);
+                UIManager.Instance.ClosePrompt();
             }
         }
     }
 
     private void SetPromptText()
     {
-        promptText.gameObject.SetActive(true);
-        promptText.text = curInteractable.GetInteractPrompt();
+        UIManager.Instance.OpenPrompt(curInteractable.GetInteractPrompt());
     }
 
     public void OnInteractInput(InputAction.CallbackContext context)
@@ -81,7 +78,7 @@ public class Interaction : MonoBehaviour
             curInteractable.OnInteract();
             curInteractGameObject = null;
             curInteractable = null;
-            promptText.gameObject.SetActive(false);
+            UIManager.Instance.ClosePrompt();
             curItemObject = null;
         }
     }
