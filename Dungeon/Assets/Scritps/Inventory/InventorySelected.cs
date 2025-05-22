@@ -130,14 +130,7 @@ public class InventorySelected : MonoBehaviour
 
     public void OnUnEquipButton(int index)
     {
-        slots[index].equipped = false;
-        CharcterManager.Instance.player.equipment.UnEquip();
-        InventoryManager.Instance.UpdateUI();
-
-        if (selectedItemIndex == index)
-        {
-            SelectItem(selectedItemIndex);
-        }
+        UnEquip(index);
     }
 
     void UnEquip(int index)

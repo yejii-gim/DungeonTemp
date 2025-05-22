@@ -214,6 +214,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
     public void OnDoubleJump(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)

@@ -10,9 +10,9 @@ public class Condition : MonoBehaviour
     public float startValue;
     public float maxValue; // 레벨에 따라 달라질때 이거 조절
     public float passiveValue;
-    public Image uiBar;
-    public TextMeshProUGUI curText;
-    public TextMeshProUGUI maxText;
+    [SerializeField] private Image _uiBar;
+    [SerializeField] private TextMeshProUGUI _curText;
+    [SerializeField] private TextMeshProUGUI _maxText;
     private void Start()
     {
         curValue = startValue;
@@ -22,7 +22,7 @@ public class Condition : MonoBehaviour
     private void Update()
     {
         // ui 업데이트
-        uiBar.fillAmount = GetPercentage();
+        _uiBar.fillAmount = GetPercentage();
         UIText();
     }
 
@@ -43,13 +43,13 @@ public class Condition : MonoBehaviour
 
     private void UIText()
     {
-        if (uiBar != null)
-            uiBar.fillAmount = GetPercentage();
+        if (_uiBar != null)
+            _uiBar.fillAmount = GetPercentage();
 
-        if (curText != null && maxText != null)
+        if (_curText != null && _maxText != null)
         {
-            curText.text = $"{Mathf.CeilToInt(curValue)}";
-            maxText.text = $" / {Mathf.CeilToInt(maxValue)}";
+            _curText.text = $"{Mathf.CeilToInt(curValue)}";
+            _maxText.text = $" / {Mathf.CeilToInt(maxValue)}";
         } 
     }
 }

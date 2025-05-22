@@ -47,7 +47,8 @@ public class Interaction : MonoBehaviour
                 {
                     curInteractGameObject = hit.collider.gameObject;
                     curInteractable = hit.collider.GetComponent<IInteractable>();
-                    curItemObject = hit.collider.GetComponent<ItemObject>().ItemData;
+                    var itemObject = hit.collider.GetComponent<ItemObject>();
+                    curItemObject = itemObject ? itemObject.ItemData : null;
                     // 프롬포트에 출력
                     SetPromptText();
                 }
@@ -82,4 +83,17 @@ public class Interaction : MonoBehaviour
             curItemObject = null;
         }
     }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started && curInteractable != null)
+        {
+            if (curInteractable is Shooter shooter)
+            {
+                curInteractable.OnInteract();
+            }
+           
+        }
+    }
+
 }

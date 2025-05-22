@@ -377,6 +377,7 @@
 "Assets/Scritps/Objects/Laser.cs"
 "Assets/Scritps/Objects/MovingPlatform.cs"
 "Assets/Scritps/Objects/MusicZone.cs"
+"Assets/Scritps/Objects/Shooter.cs"
 "Assets/Scritps/Player/CharcterManager.cs"
 "Assets/Scritps/Player/Equipment.cs"
 "Assets/Scritps/Player/FootSteps.cs"
