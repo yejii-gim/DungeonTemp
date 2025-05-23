@@ -1,3 +1,15 @@
+<div align="left" style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; background-color: #fdfdfd; box-shadow: 1px 1px 5px rgba(0,0,0,0.1)">
+
+<h4>📑 주요 목차</h4>
+
+<ol>
+  <li><a href="#-던전-dungeon">🏰 던전 (Dungeon)</a></li>
+  <li><a href="#-주요-기능">🎮 주요 기능</a></li>
+  <li><a href="#️-트러블슈팅">🛠️ 트러블슈팅</a></li>
+</ol>
+
+</div>
+    
 # 🏰 던전 (Dungeon)
 
 - **게임명** : 던전
