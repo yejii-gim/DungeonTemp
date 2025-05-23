@@ -9,8 +9,8 @@
 
 
 ### ❤️‍🔥 체력 UI & 레이저
- - 레이저나 몬스터에 닿으면 체력이 감소하며 UI가 실시간으로 갱싱된다.
- - 체력이 0이 되면 사망한다.
+ - 레이저나 몬스터에 닿으면 체력이 감소하며 UI가 실시간으로 갱신
+ - 체력이 0이 되면 사망
 <details>
 <summary>❤️‍🔥 체력 UI & 레이저 코드 및 GIF 보기</summary>
 <div align="center">
@@ -91,7 +91,6 @@ public void TakePhysicalDamage(int damage)
 
 ### 🔍 동적 환경 조사
  - Raycast를 통해 플레이어가 조사하는 오브젝트의 정보를 UI에 표시
- - 체력이 0이 되면 사망한다.
 <details>
 <summary>🔍 동적 환경 조사 코드 및 GIF 보기</summary>
 <div align="center">
@@ -161,8 +160,8 @@ private void SetPromptText()
 ---
 
 ###  🎈 점프대 플랫폼 & 이동형 플랫폼
- - 특정 플랫폼에 플레이어가 닿으면 점프 또는 이동 기능이 활성화된다.
- - 점프대는 플레이어를 위로 튕겨내고 이동형 플랫폼은 플레이어를 함께 이동시킨다.
+ - 특정 플랫폼에 플레이어가 닿으면 점프 또는 이동 기능이 활성화
+ - 점프대는 플레이어를 위로 튕겨내고 이동형 플랫폼은 플레이어를 함께 이동
 <details>
 <summary>🎈 플랫폼들  코드 및 GIF 보기</summary>
   
@@ -316,75 +315,76 @@ public class ItemData : ScriptableObject
 ```
 </details>
 
-### 🔄 추가 UI
- - 스킬 사용시 소모되는 스태미나 바, HUNGRY, 조작법 알려주는 ui 추가 구현
+### 🎨 추가 UI
+ - 스킬 사용시 소모되는 스태미나 바, 허기 , 조작법 알려주는 UI 추가 구현
 <details>
-<summary>🔄 시점 전환 코드 및 GIF 보기</summary>
+<summary> 🎨 추가 UI 코드 및 GIF 보기</summary>
 <div align="center">
 <img src="https://github.com/user-attachments/assets/731258b7-0e6e-484c-8fb9-c8afdf80f3a8" alt="추가 UI" width="600"/>
 </div>
 
-  ### 1️⃣ 스태미나나
+  ### 1️⃣ 스태미나 바
 
   ```csharp
-public void onSwitchCamera(InputAction.CallbackContext context)
+Condition stamina { get { return uiCondition.stamina; } }
+private void Update()
 {
-    if (context.phase == InputActionPhase.Started)
+    stamina.Add(stamina.passiveValue * Time.deltaTime);
+}
+
+public bool UseStamina(float amount)
+{
+    if(stamina.curValue - amount < 0f)
     {
-        isFirstPerson = !isFirstPerson;
-        if (isFirstPerson)
-        {
-            firstPerson.gameObject.SetActive(true);
-            thirdPerson.gameObject.SetActive(false);
-        }
-        else
-        {
-            thirdPerson.gameObject.SetActive(true);
-            firstPerson.gameObject.SetActive(false);
-        }
+        return false;
     }
+    stamina.Substact(amount);
+    return true;
 }
 ```
 ---
 
-### 2️⃣ JUNGRY
+### 2️⃣ 허기 바
 ```csharp
-Ray ray;
+Condition hunger { get { return uiCondition.hunger; } }
+private void Update()
+{
+    if (!isInvincible)
+    {
+        hunger.Substact(hunger.passiveValue * Time.deltaTime);
 
-if (CharcterManager.Instance.player.controller.isFirstPerson)
-{
-    camera = CharcterManager.Instance.player.controller.firstPerson;
-    ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-    _rayText.text = "1인칭 시점";
+        if (hunger.curValue == 0f) 
+        {
+            health.Substact(noHungerHealthDecay * Time.deltaTime);
+        }
+    }
 }
-else
+
+public void Eat(float count)
 {
-    camera = CharcterManager.Instance.player.controller.thirdPerson;
-    ray = new Ray(_thirdPersonTransform.position, camera.transform.forward);
-    _rayText.text = "3인칭 시점";
+    hunger.Add(count);
 }
 ```
 
-### 3️⃣ 조작법 알려주는 ui
+### 3️⃣ 조작법 알려주는 UI
 ```csharp
-Ray ray;
+ public GameObject informationWindow;
+ private void Start()
+ {
+     var controller = CharcterManager.Instance.player.controller ?? CharcterManager.Instance.player.GetComponent<PlayerController>();
+     controller.OnInformation += Toggle;
+     informationWindow.SetActive(false);
+ }
 
-if (CharcterManager.Instance.player.controller.isFirstPerson)
-{
-    camera = CharcterManager.Instance.player.controller.firstPerson;
-    ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-    _rayText.text = "1인칭 시점";
-}
-else
-{
-    camera = CharcterManager.Instance.player.controller.thirdPerson;
-    ray = new Ray(_thirdPersonTransform.position, camera.transform.forward);
-    _rayText.text = "3인칭 시점";
-}
+ public void Toggle()
+ {
+     UIManager.Instance.Toggle(informationWindow);
+ }
 ```
 
 </details>
 
+---
 
 ### 🔄 시점 전환
  - 1인칭 & 3인칭 카메라 모드 전환 가능
@@ -436,8 +436,262 @@ else
 ```
 </details>
 
+---
 
-![추가 UI](https://github.com/user-attachments/assets/731258b7-0e6e-484c-8fb9-c8afdf80f3a8)
-![벽타기](https://github.com/user-attachments/assets/1aefe1be-4c20-4b39-bd18-91aa3949188a)
-![아이템 사용](https://github.com/user-attachments/assets/e146b79a-e591-434e-a076-e09bdfea84e3)
+### 🧗 벽타기
+ - 플레이어가 벽에 가까이 있을 때 점프 버튼을 누르면 벽타기 가능능
+<details>
+<summary> 🧗 벽타기 코드 및 GIF 보기</summary>
+<div align="center">
+<img src="https://github.com/user-attachments/assets/1aefe1be-4c20-4b39-bd18-91aa3949188a" alt="벽타기" width="600"/>
+</div>
+
+  ### 1️⃣ 벽인지 체크(Raycast)
+
+  ```csharp
+ private bool CheckWall()
+ {
+     Ray ray = new Ray(transform.position, transform.forward);
+     _wallCheck = Physics.Raycast(ray, _climbCheckDistance, wallLayer);
+     if (_wallCheck) return true;
+     return false;
+ }
+```
+---
+
+### 2️⃣ 점프 입력시 벽 타기 조건 추
+```csharp
+public void OnJump(InputAction.CallbackContext context)
+{
+    if (context.phase != InputActionPhase.Started) return;
+
+    if(IsGrounded()) // 점프
+    {
+         _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
+    }
+    else if(CheckWall() && !IsGrounded()) // 벽타기
+    {
+        _rb.AddForce(Vector3.up * _jumpPower * 5f, ForceMode.Impulse);
+    }
+}
+```
+
+</details>
+
+---
+
+### 🧾 다양한 아이템 구현
+ - 아이템 습득시 스킬(대쉬, 무적, 더블 점프) 해금 가능 
+<details>
+<summary> 🧾 다양한 아이템  UI 코드 및 GIF 보기</summary>
+
+  ### 1️⃣ 대쉬
+  
+<div align="center">
+<img src="https://github.com/user-attachments/assets/85dadb98-b52a-4151-8564-de1fa466dac4" alt="대쉬" width="600"/>
+</div>
+
+  ```csharp
+public void OnDash(InputAction.CallbackContext context)
+{
+    if (context.phase == InputActionPhase.Started)
+    {
+        if (SkillManager.Instance.CheckUnLockSkill(SkillType.Dash) && !isDash)
+        {
+            SkillManager.Instance.TriggerCooldown(SkillType.Dash);
+            condition.Dash(20f);
+            StartCoroutine(Dash(_dashPower));
+        }
+    }
+}
+
+private IEnumerator Dash(float dashPower)
+{
+    isDash = true;
+    Camera cam = CharcterManager.Instance.player.controller.isFirstPerson ? CharcterManager.Instance.player.controller.firstPerson : CharcterManager.Instance.player.controller.thirdPerson;
+    Vector3 dir = cam.transform.forward;
+    dir.y = 0f; // 수평이동만 하기위해 y를 0으로 설정
+    dir.Normalize();
+    _rb.AddForce(dir * dashPower, ForceMode.Impulse);
+    CharcterManager.Instance.player.controller.canMove = false;
+    Invoke(nameof(CharcterManager.Instance.player.controller.EnableMove), 0.5f);
+    yield return new WaitForSeconds(SkillManager.Instance.GetCoolTime(SkillType.Dash));
+
+    isDash = false;
+}
+```
+---
+
+### 2️⃣ 더블 점프
+
+<div align="center">
+<img src="https://github.com/user-attachments/assets/d432f08e-c4b6-40ce-9b9d-ddbc43027e34" alt="더블 점프" width="600"/>
+</div>
+
+```csharp
+public void OnDoubleJump(InputAction.CallbackContext context)
+{
+    if (context.phase == InputActionPhase.Started)
+    {
+        if (IsGrounded() && !isDoubleJump)
+        {
+            jumpCount = 0;
+            isDoubleJump = true;
+            SkillManager.Instance.TriggerCooldown(SkillType.DoubleJump);
+            condition.DoubleJump(10f);
+        }
+        if (SkillManager.Instance.CheckUnLockSkill(SkillType.DoubleJump) && jumpCount < maxJumpCount && isDoubleJump)
+        {
+            jumpCount++;
+            _rb.velocity = new Vector2(_rb.velocity.x, 0f); 
+            _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
+            if(jumpCount == maxJumpCount) isDoubleJump = false;
+        }
+    }
+}
+```
+
+### 3️⃣ 무적
+
+<div align="center">
+<img src="https://github.com/user-attachments/assets/a6f7c478-e6fd-410f-bb6a-9e73c97a5dcd" alt="무적" width="600"/>
+</div>
+
+```csharp
+// PlayerCondition.cs
+ private void Update()
+ {
+     stamina.Add(stamina.passiveValue * Time.deltaTime);
+     if (!isInvincible)
+     {
+         hunger.Substact(hunger.passiveValue * Time.deltaTime);
+         
+
+         if (hunger.curValue == 0f)
+         {
+             health.Substact(noHungerHealthDecay * Time.deltaTime);
+         }
+
+         if (health.curValue == 0f)
+         {
+             Die();
+         }
+     }
+     // 무적 관련
+     else
+     {
+         invincibleTime -= Time.deltaTime;
+         if (invincibleTime <= 0f)
+         {
+             isInvincible = false;  
+         }
+     }
+ }
+
+// PlayerController.cs
+public void OnInvincible(InputAction.CallbackContext context)
+{
+    if (context.phase == InputActionPhase.Started)
+    {
+        if (SkillManager.Instance.CheckUnLockSkill(SkillType.Invincible))
+        {
+            SkillManager.Instance.TriggerCooldown(SkillType.Invincible);
+            condition.Invincibility(40f, SkillManager.Instance.GetCoolTime(SkillType.Invincible));
+        }
+    }    
+}
+```
+
+</details>
+
+---
+
+### ⚒️ 장비 장착 및 해제
+ - 다양한 아이템 데이터를 ScriptableObject로 정의. 각 아이템의 이름, 설명, 속성 등을 ScriptableObject로 관리
+ - 소비 아이템 사용시 아이템 종류에 따라 효과 적용
+<details>
+<summary>⚒️ 장비 장착 및 해제 및 GIF 보기</summary>
+<div align="center">
+<img src="https://github.com/user-attachments/assets/ff685e21-5b59-4e3b-a850-6455b14d72a9" alt="아이템 사용" width="600"/>
+</div>
+
+  ### 1️⃣ 장비 장착
+  
+  ```csharp
+// 아이템 선택시 상세정보 UI에 표시하게 해주는 함수
+public void SelectItem(int index)
+{
+    if (slots[index].item == null) return;
+
+    selectedItem = slots[index].item;
+    selectedItemIndex = index;
+
+    // 텍스트 정보 업데이트
+    selectedItemName.text = selectedItem.displayName;
+    selectedItemDescription.text = selectedItem.description;
+
+    selectedStatName.text = string.Empty;
+    selectedStatValue.text = string.Empty;
+
+    // 소비 아이템 효과 목록 표시
+    for (int i = 0; i < selectedItem.consumables.Length; i++)
+    {
+        selectedStatName.text += selectedItem.consumables[i].type.ToString() + "\n";
+        selectedStatValue.text += selectedItem.consumables[i].value.ToString() + "\n";
+    }
+
+    // 버튼 상태 설정
+    useButton.SetActive(selectedItem.type == ItemType.Consumable);
+    equipButton.SetActive(selectedItem.type == ItemType.Equipable && !slots[index].equipped);
+    unequipButton.SetActive(selectedItem.type == ItemType.Equipable && slots[index].equipped);
+    dropButton.SetActive(true);
+}
+
+public void OnEquipButton()
+{
+    if (slots[curEquipIndex].equipped)
+    {
+        UnEquip(curEquipIndex);
+    }
+    slots[selectedItemIndex].equipped = true;
+    curEquipIndex = selectedItemIndex;
+    CharcterManager.Instance.player.equipment.EquipNew(selectedItem);
+    InventoryManager.Instance.UpdateUI();
+
+    SelectItem(selectedItemIndex);
+}
+```
+---
+
+### 2️⃣ 장비 해제
+```csharp
+ public void OnUnEquipButton(int index)
+{
+    UnEquip(index);
+}
+
+void UnEquip(int index)
+{
+    slots[index].equipped = false;
+    CharcterManager.Instance.player.equipment.UnEquip();
+    InventoryManager.Instance.UpdateUI();
+
+    if (selectedItemIndex == index)
+    {
+     리
+```csharp
+ public void OnShoot(InputAction.CallbackContext context)
+ {
+     if (context.phase == InputActionPhase.Started && curInteractable != null)
+     {
+         if (curInteractable is Shooter shooter)
+         {
+             curInteractable.OnInteract();
+         }
+        
+     }
+ }
+```
+
+</details>
 
