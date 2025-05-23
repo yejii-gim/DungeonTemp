@@ -1,18 +1,17 @@
 # 🏰 던전 (Dungeon)
 
-> Unity 기반 3D 액션 게임
-
-## **던전**은 Unity와 C#으로 제작된 3D 액션 게임입니다.  
-### 플레이어는 다양한 시점(1인칭 / 3인칭)으로 전환하며, 상호작용, 스킬, 플랫폼, 적 처치 등의 메커니즘을 통해 탐험합니다.
+- **게임명** : 던전
+- **장르** : Unity 기반 3D 액션 게임
+- **개발 엔진**: Unity `2022.3.17f1`
+- **개발 기간**: 2025.05.16 ~ 2025.05.23
 
 ## 🎮 주요 기능
-
 
 ### ❤️‍🔥 체력 UI & 레이저
  - 레이저나 몬스터에 닿으면 체력이 감소하며 UI가 실시간으로 갱신
  - 체력이 0이 되면 사망
 <details>
-<summary>❤️‍🔥 체력 UI & 레이저 코드 및 GIF 보기</summary>
+<summary>🔽 체력 UI & 레이저 코드 및 GIF 보기</summary>
 <div align="center">
 <img src="https://github.com/user-attachments/assets/9c01e4b7-c53d-4363-b287-ddf675a8d31e" alt="체력 UI 변화 및 레이저" width="600"/>
 </div>
@@ -92,7 +91,7 @@ public void TakePhysicalDamage(int damage)
 ### 🔍 동적 환경 조사
  - Raycast를 통해 플레이어가 조사하는 오브젝트의 정보를 UI에 표시
 <details>
-<summary>🔍 동적 환경 조사 코드 및 GIF 보기</summary>
+<summary> 🔽 동적 환경 조사 코드 및 GIF 보기 </summary>
 <div align="center">
 <img src="https://github.com/user-attachments/assets/2af629e1-7d63-4f76-8140-fffb1a21a281" alt="상호작용" width="600"/>
 </div>
@@ -163,7 +162,7 @@ private void SetPromptText()
  - 특정 플랫폼에 플레이어가 닿으면 점프 또는 이동 기능이 활성화
  - 점프대는 플레이어를 위로 튕겨내고 이동형 플랫폼은 플레이어를 함께 이동
 <details>
-<summary>🎈 플랫폼들  코드 및 GIF 보기</summary>
+<summary>🔽  플랫폼들  코드 및 GIF 보기</summary>
   
   ### 1️⃣ 점프 패드
 <div align="center">
@@ -233,7 +232,7 @@ private void Update()
  - 다양한 아이템 데이터를 ScriptableObject로 정의. 각 아이템의 이름, 설명, 속성 등을 ScriptableObject로 관리
  - 소비 아이템 사용시 아이템 종류에 따라 효과 적용
 <details>
-<summary>🛒아이템 데이터 & 아이템 사용 및 GIF 보기</summary>
+<summary>🔽 아이템 데이터 & 아이템 사용 및 GIF 보기</summary>
 <div align="center">
 <img src="https://github.com/user-attachments/assets/e146b79a-e591-434e-a076-e09bdfea84e3" alt="아이템 사용" width="600"/>
 </div>
@@ -315,10 +314,12 @@ public class ItemData : ScriptableObject
 ```
 </details>
 
+---
+
 ### 🎨 추가 UI
  - 스킬 사용시 소모되는 스태미나 바, 허기 , 조작법 알려주는 UI 추가 구현
 <details>
-<summary> 🎨 추가 UI 코드 및 GIF 보기</summary>
+<summary> 🔽  추가 UI 코드 및 GIF 보기</summary>
 <div align="center">
 <img src="https://github.com/user-attachments/assets/731258b7-0e6e-484c-8fb9-c8afdf80f3a8" alt="추가 UI" width="600"/>
 </div>
@@ -389,7 +390,7 @@ public void Eat(float count)
 ### 🔄 시점 전환
  - 1인칭 & 3인칭 카메라 모드 전환 가능
 <details>
-<summary>🔄 시점 전환 코드 및 GIF 보기</summary>
+<summary>🔽  시점 전환 코드 및 GIF 보기</summary>
 <div align="center">
 <img src="https://github.com/user-attachments/assets/c8b400e7-b76c-4715-a3fe-28acdb751372" alt="3인칭 시점" width="600"/>
 </div>
@@ -441,7 +442,7 @@ else
 ### 🧗 벽타기
  - 플레이어가 벽에 가까이 있을 때 점프 버튼을 누르면 벽타기 가능능
 <details>
-<summary> 🧗 벽타기 코드 및 GIF 보기</summary>
+<summary> 🔽  벽타기 코드 및 GIF 보기</summary>
 <div align="center">
 <img src="https://github.com/user-attachments/assets/1aefe1be-4c20-4b39-bd18-91aa3949188a" alt="벽타기" width="600"/>
 </div>
@@ -483,7 +484,7 @@ public void OnJump(InputAction.CallbackContext context)
 ### 🧾 다양한 아이템 구현
  - 아이템 습득시 스킬(대쉬, 무적, 더블 점프) 해금 가능 
 <details>
-<summary> 🧾 다양한 아이템  UI 코드 및 GIF 보기</summary>
+<summary> 🔽  다양한 아이템 코드 UI 코드 및 GIF 보기</summary>
 
   ### 1️⃣ 대쉬
   
@@ -607,12 +608,11 @@ public void OnInvincible(InputAction.CallbackContext context)
 ---
 
 ### ⚒️ 장비 장착 및 해제
- - 다양한 아이템 데이터를 ScriptableObject로 정의. 각 아이템의 이름, 설명, 속성 등을 ScriptableObject로 관리
- - 소비 아이템 사용시 아이템 종류에 따라 효과 적용
+
 <details>
-<summary>⚒️ 장비 장착 및 해제 및 GIF 보기</summary>
+<summary> 🔽 장비 장착 및 해제 코드 및 GIF 보기</summary>
 <div align="center">
-<img src="https://github.com/user-attachments/assets/ff685e21-5b59-4e3b-a850-6455b14d72a9" alt="아이템 사용" width="600"/>
+<img src="https://github.com/user-attachments/assets/ff685e21-5b59-4e3b-a850-6455b14d72a9" alt="장비 장착 및 해제" width="600"/>
 </div>
 
   ### 1️⃣ 장비 장착
@@ -665,7 +665,21 @@ public void OnEquipButton()
 
 ### 2️⃣ 장비 해제
 ```csharp
- public void OnUnEquipButton(int index)
+ public void OnEquipButton()
+{
+    if (slots[curEquipIndex].equipped)
+    {
+        UnEquip(curEquipIndex);
+    }
+    slots[selectedItemIndex].equipped = true;
+    curEquipIndex = selectedItemIndex;
+    CharcterManager.Instance.player.equipment.EquipNew(selectedItem);
+    InventoryManager.Instance.UpdateUI();
+
+    SelectItem(selectedItemIndex);
+}
+
+public void OnUnEquipButton(int index)
 {
     UnEquip(index);
 }
@@ -678,7 +692,75 @@ void UnEquip(int index)
 
     if (selectedItemIndex == index)
     {
-     리
+        SelectItem(selectedItemIndex);
+    }
+}
+
+```
+
+</details>
+
+---
+
+### 📦 상호작용 가능한 오브젝트 표시
+ - 플레이어가 상호작용 가능한 오브젝트(Box 등) 에 접근하면 UI 표시
+ - Box를 열면 랜덤으로 아이템 드롭
+<details>
+<summary> 🔽 상호작용 가능한 오브젝트 표시 코드 및 GIF 보기</summary>
+<div align="center">
+<img src="https://github.com/user-attachments/assets/a92b2485-481c-4d9c-ab90-943d0376506a" alt="상호작용 가능한 오브젝트 표시" width="600"/>
+</div>
+ 
+  ### 1️⃣ 상호작용 입력 처리
+  
+```csharp
+public void OnInteractInput(InputAction.CallbackContext context)
+{
+    if(context.phase == InputActionPhase.Started && curInteractable != null)
+    {
+        if (curItemObject.type == ItemType.Box)
+        {
+            int idx = Random.Range(0, items.Length);
+            InventoryManager.Instance.ThrowItem(items[idx]);
+        }
+        curInteractable.OnInteract();
+        curInteractGameObject = null;
+        curInteractable = null;
+        UIManager.Instance.ClosePrompt();
+        curItemObject = null;
+    }
+}
+```
+
+
+</details>
+
+---
+
+### 🚀 플랫폼 발사기
+ - 플레이어가 플랫폼 위에 서 있을 때 특정 방향으로 힘을 가해 발사하는 시스템 구현
+ - 특정 키를 누르면 발
+<details>
+<summary> 🔽 플랫폼 발사 코드 및 GIF 보기</summary>
+<div align="center">
+<img src="https://github.com/user-attachments/assets/8d8fd3ae-0805-46f3-9163-42a914465436" alt="플랫폼 발사기" width="600"/>
+</div>
+ 
+  ### 1️⃣ 물리 기반 발사 로직
+  
+```csharp
+private void Shoot()
+{
+    Vector3 dir =  shootDirection.position - shootPosition.position;
+    _rb.AddForce(dir * _shootPower, ForceMode.Impulse);
+    CharcterManager.Instance.player.transform.rotation = _orgRotation;
+    CharcterManager.Instance.player.controller.canMove = false;
+    Invoke(nameof(CharcterManager.Instance.player.controller.EnableMove), 0.5f);
+}
+```
+
+---
+### 2️⃣ 상호작용 입력 처리
 ```csharp
  public void OnShoot(InputAction.CallbackContext context)
  {
@@ -694,4 +776,16 @@ void UnEquip(int index)
 ```
 
 </details>
+
+---
+
+## 🛠️ 트러블슈팅
+1. AddForce를 사용해서 발사기를 구현하였는데 발사되지 않는 문제
+Move의 veloctiy와 겹쳐서 AddForce가 실행되지 않았음 그래서 발사기를 사용할때는 Move를 멈추도록 설정
+
+2. Dash 사용시 캐럭터가 보는 방향이 아니라 다른 방향으로 나가는 문제
+플레이어 위치를 기반으로 방향을 정했더니 현재 보이는 위치의 앞으로 가지 않았음. 현재 시점의 카메라의 forwad 벡터 기반으로 설정
+
+3. 시점 전환 후 RayCast가 이상하게 나가서 아이템들과 상호작용이 잘 안되는 문제
+1인칭은 화면 중앙 기준, 3인칭은 카메라 전방 벡터 기반으로 Ray 분기 처리했더니 해결
 
