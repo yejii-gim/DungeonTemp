@@ -64,7 +64,10 @@ public class Interaction : MonoBehaviour
 
     private void SetPromptText()
     {
-        UIManager.Instance.OpenPrompt(curInteractable.GetInteractPrompt());
+        if (curInteractable != null)
+        {
+            UIManager.Instance.OpenPrompt(curInteractable.GetInteractPrompt());
+        }
     }
 
     public void OnInteractInput(InputAction.CallbackContext context)

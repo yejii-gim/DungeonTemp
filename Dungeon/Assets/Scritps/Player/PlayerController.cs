@@ -256,10 +256,13 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Dash(float dashPower)
     {
         isDash = true;
-
-        Vector2 dir = new Vector2(transform.localScale.x, 0f); // 현재 플레이어가 바라보는 방향
+        Camera cam = CharcterManager.Instance.player.controller.isFirstPerson ? CharcterManager.Instance.player.controller.firstPerson : CharcterManager.Instance.player.controller.thirdPerson;
+        Vector3 dir = cam.transform.forward;
+        dir.y = 0f; // 수평이동만 하기위해 y를 0으로 설정
+        dir.Normalize();
         _rb.AddForce(dir * dashPower, ForceMode.Impulse);
-
+        CharcterManager.Instance.player.controller.canMove = false;
+        Invoke(nameof(CharcterManager.Instance.player.controller.EnableMove), 0.5f);
         yield return new WaitForSeconds(SkillManager.Instance.GetCoolTime(SkillType.Dash));
 
         isDash = false;

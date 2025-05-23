@@ -71,8 +71,8 @@ public class InventorySelected : MonoBehaviour
 
     public void OnUseButton()
     {
-        if (selectedItem.type != ItemType.Consumable || selectedItem.type != ItemType.Box) return;
-
+        if (selectedItem.type != ItemType.Consumable && selectedItem.type != ItemType.Box) return;
+        
         foreach (var effect in selectedItem.consumables)
         {
             switch (effect.type)
